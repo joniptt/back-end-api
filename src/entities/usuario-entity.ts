@@ -1,5 +1,15 @@
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
+
 export class Usuario {
-  name: string;
-  password: string;
-  email: string;
+  @PrimaryGeneratedColumn()
+  id?: number;
+
+  @Column()
+  name?: string;
+
+  @Column()
+  password?: string;
+
+  @Column()
+  email?: string;
 }

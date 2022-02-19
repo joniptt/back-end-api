@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from 'src/entities/usuario-entity';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsuarioService {
-  constructor(
-    @InjectRepository(Usuario) private usuariocad: Repository<Usuario>,
-  ) {}
+  constructor() {} // @InjectRepository(Usuario) private userEnti: Repository<Usuario>,
+  Usuarios: Usuario[] = [];
+
+  async cadUsuario(user: Usuario) {
+    let usuario = new Usuario();
+    usuario.email = user.email;
+    usuario.password = user.password;
+    this.Usuarios.push(usuario);
+
+    // if (usuario instanceof Usuario) {
+    // .push(usuario);
+    // } else {
+    //   throw new Error('Usuario ja cadastrado');
+    // }
+  }
+
+  async getAll() {
+    return this.Usuarios;
+  }
 }

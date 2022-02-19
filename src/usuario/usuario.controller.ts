@@ -1,8 +1,21 @@
-/*
-https://docs.nestjs.com/controllers#controllers
-*/
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Usuario } from 'src/entities/usuario-entity';
+import { UsuarioService } from './usuario.service';
 
-import { Controller } from '@nestjs/common';
+@Controller('usuarios')
+export class UsuarioController {
+  constructor(private usuarioCad: UsuarioService) {}
 
-@Controller()
-export class UsuarioController {}
+  @Post('cadastrar')
+  cadUsuario(@Body() user: Usuario) {
+    return this.usuarioCad.cadUsuario(user);
+  }
+
+  @Get('')
+  async getUsers() {
+    return this.usuarioCad.getAll();
+  }
+
+  @Post('login')
+  async getOneRec() {}
+}
