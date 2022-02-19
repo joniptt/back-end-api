@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Usuario } from 'src/entities/usuario-entity';
+import { UsuarioObj } from 'src/dto/usuario.dto';
 import { UsuarioService } from './usuario.service';
 
 @Controller('usuarios')
@@ -7,7 +7,7 @@ export class UsuarioController {
   constructor(private usuarioCad: UsuarioService) {}
 
   @Post('cadastrar')
-  cadUsuario(@Body() user: Usuario) {
+  cadUsuario(@Body() user: UsuarioObj) {
     return this.usuarioCad.cadUsuario(user);
   }
 
