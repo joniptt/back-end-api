@@ -10,13 +10,19 @@ export class UsuarioService {
     let usuario = new Usuario();
     usuario.email = user.email;
     usuario.password = user.password;
-    this.Usuarios.push(usuario);
+    if (usuario instanceof Usuario) {
+      this.Usuarios.push(usuario);
+    }
 
     // if (usuario instanceof Usuario) {
     // .push(usuario);
     // } else {
     //   throw new Error('Usuario ja cadastrado');
     // }
+  }
+
+  async loginUsu(user: Usuario) {
+    const login = await this.;
   }
 
   async getAll() {
