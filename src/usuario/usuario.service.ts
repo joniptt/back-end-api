@@ -14,7 +14,21 @@ export class UsuarioService {
     const usuario = new Usuario();
     usuario.email = user.email;
     usuario.password = user.password;
-    this.userEnti.save(usuario);
+    const userEmail = await this.userVerify(usuario.email);
+    if (userEmail === null) {
+      this.userEnti.save(usuario);
+    } else {
+      return 'error';
+    }
+  }
+
+  async userVerify(email: string) {
+    const vEmail = await this.userEnti.findOne({ where: { email } });
+    if (vEmail != null) {
+      return 'email existente';
+    } else {
+      return null;
+    }
   }
 
   async loginUsu() {}

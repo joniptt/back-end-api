@@ -3,8 +3,8 @@ module.exports = {
   host: 'localhost',
   port: 3306,
   username: 'root',
-  password: 'root',
-  database: 'mysql',
+  password: '',
+  database: 'cadastro',
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
 };
