@@ -31,9 +31,11 @@ export class UsuarioService {
     }
   }
 
-  async loginUsu() {}
+  async loginVerify(email: string) {
+    return await this.userEnti.findOne({ email });
+  }
 
   async getAll() {
-    return this.userEnti.recover;
+    return this.userEnti.find();
   }
 }

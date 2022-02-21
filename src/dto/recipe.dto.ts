@@ -1,7 +1,5 @@
-export class Recipes {
-  id: number;
+export class RecipesDto {
   name: string;
   description: string;
   imagePath: string;
-  ingredients: [];
 }
