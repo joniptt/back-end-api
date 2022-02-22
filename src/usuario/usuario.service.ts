@@ -32,7 +32,7 @@ export class UsuarioService {
   }
 
   async loginVerify(email: string) {
-    return await this.userEnti.findOne({ email });
+    return await this.userEnti.findOneOrFail({ where: { email } });
   }
 
   async getAll() {

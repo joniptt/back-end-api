@@ -16,10 +16,13 @@ export class AuthService {
     }
     return null;
   }
-  login(user: any) {
-    const payload = { email: user.email, sub: user.password };
+  async login(user: any) {
+    const payload = {
+      sub: user.id,
+      email: user.email,
+    };
     return {
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
     };
   }
 }
