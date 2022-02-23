@@ -11,18 +11,24 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.userService.loginVerify(email);
     if (user && user.password === pass) {
-      const { email, password } = user;
-      return { email, password };
+      const { id, email, password } = user;
+      return { id, email, password };
     }
     return null;
   }
   async login(user: any) {
     const payload = {
-      sub: user.id,
-      email: user.email,
+      userid: user.id,
+      sub: user.email,
     };
+    console.log(payload);
+    localStorage.setItem(
+      'jwtToken',
+      await this.jwtService.sign(payload, { expiresIn: '60s' }),
+    );
+    var token = localStorage.getItem('jwtToken');
     return {
-      token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload, { expiresIn: '60s' }),
     };
   }
 }

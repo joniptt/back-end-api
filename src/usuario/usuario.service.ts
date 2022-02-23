@@ -15,10 +15,14 @@ export class UsuarioService {
     usuario.email = user.email;
     usuario.password = user.password;
     const userEmail = await this.userVerify(usuario.email);
-    if (userEmail === null) {
-      this.userEnti.save(usuario);
-    } else {
-      return 'error';
+    try {
+      if (userEmail === null) {
+        this.userEnti.save(usuario);
+        return { message: 'Cadastro realizado com sucesso!' };
+      }
+      throw new Error();
+    } catch (error) {
+      return { message: 'Não foi possível realizar o cadastro!' };
     }
   }
 

@@ -7,15 +7,12 @@ import { UsuarioService } from './usuario.service';
 export class UsuarioController {
   constructor(private usuarioCad: UsuarioService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post('cadastrar')
-  cadUsuario(@Body() user: UsuarioObj) {
-    return this.usuarioCad.cadUsuario(user);
+  async cadUsuario(@Body() user: UsuarioObj) {
+    return await this.usuarioCad.cadUsuario(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('')
-  async getUsers() {
-    return this.usuarioCad.getAll();
-  }
+  async getUsers() {}
 }
