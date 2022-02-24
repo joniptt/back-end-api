@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import jwtDecode from 'jwt-decode';
+import { UsuarioObj } from 'src/dto/usuario.dto';
 import { UsuarioService } from 'src/usuario/usuario.service';
 
 @Injectable()
@@ -11,24 +13,22 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.userService.loginVerify(email);
     if (user && user.password === pass) {
-      const { id, email, password } = user;
-      return { id, email, password };
+      const { id, email } = user;
+      return { id, email };
     }
     return null;
   }
-  async login(user: any) {
+
+  async signJwt(user: UsuarioObj) {
     const payload = {
       userid: user.id,
       sub: user.email,
     };
-    console.log(payload);
-    localStorage.setItem(
-      'jwtToken',
-      await this.jwtService.sign(payload, { expiresIn: '60s' }),
-    );
-    var token = localStorage.getItem('jwtToken');
-    return {
-      token: this.jwtService.sign(payload, { expiresIn: '60s' }),
-    };
+    return this.jwtService.sign(payload);
+  }
+  async login(user: UsuarioObj) {
+    const token = await this.signJwt(user);
+    const userData = jwtDecode(token);
+    return { token: token, decoded: userData };
   }
 }

@@ -37,6 +37,8 @@
     "eslint-plugin-import": "^2.23.4",
     "graphql": "^15.5.1",
     "graphql-tools": "^7.0.5",
+    "jwt-decode": "^3.1.2",
+    "jwthelper": "0.0.4",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "passport": "^0.5.2",
