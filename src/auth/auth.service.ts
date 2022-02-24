@@ -22,13 +22,8 @@ export class AuthService {
       sub: user.email,
     };
     console.log(payload);
-    localStorage.setItem(
-      'jwtToken',
-      await this.jwtService.sign(payload, { expiresIn: '60s' }),
-    );
-    var token = localStorage.getItem('jwtToken');
     return {
-      token: this.jwtService.sign(payload, { expiresIn: '60s' }),
+      token: this.jwtService.sign({ payload: payload, expiresIn: '60s' }),
     };
   }
 }
