@@ -3,10 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioObj } from 'src/dto/usuario.dto';
 import { Usuario } from 'src/entities/usuario.entity';
 import { Repository } from 'typeorm';
+import { CacheService } from './cache.service';
 
 @Injectable()
 export class UsuarioService {
   constructor(
+    private cacheManager: CacheService,
     @InjectRepository(Usuario) private userEnti: Repository<Usuario>,
   ) {}
 
@@ -41,5 +43,13 @@ export class UsuarioService {
 
   async getAll() {
     return this.userEnti.find();
+  }
+
+  async setCacheMaintenance(status: boolean) {
+    return await this.cacheManager.setMaintenance(status);
+  }
+
+  async getCacheMaintenance() {
+    return this.cacheManager.getMaintenance();
   }
 }

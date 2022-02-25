@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Public } from 'src/decorators/class.decorator';
 import { UsuarioObj } from 'src/dto/usuario.dto';
 import { UsuarioService } from './usuario.service';
 
@@ -11,6 +12,20 @@ export class UsuarioController {
     return await this.usuarioCad.cadUsuario(user);
   }
 
-  @Get('')
-  async getUsers() {}
+  @Public()
+  @Post('maintenance/on')
+  async setMaintenceOn(@Body() status: boolean) {
+    return await this.usuarioCad.setCacheMaintenance(status);
+  }
+
+  @Public()
+  @Post('maintenance/off')
+  async setMaintenceOff(@Body() status: boolean) {
+    return await this.usuarioCad.setCacheMaintenance(status);
+  }
+  @Public()
+  @Get('maintenance/status')
+  async getMaintenceStatus(): Promise<boolean> {
+    return <boolean>await this.usuarioCad.getCacheMaintenance();
+  }
 }
