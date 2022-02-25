@@ -1,9 +1,9 @@
 module.exports = {
-  type: 'mysql',
+  type: 'postgres',
   host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: '',
+  port: 5432,
+  username: 'postgres',
+  password: 'root',
   database: 'cadastro',
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,

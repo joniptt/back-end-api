@@ -38,18 +38,21 @@ export class UsuarioService {
   }
 
   async loginVerify(email: string) {
-    return await this.userEnti.findOneOrFail({ where: { email } });
+    return await this.userEnti.findOne({ where: { email } });
   }
 
   async getAll() {
     return this.userEnti.find();
   }
 
-  async setCacheMaintenance(status: boolean) {
-    return await this.cacheManager.setMaintenance(status);
+  async setCacheMaintenance({ status: boolean, message: string }) {
+    return await this.cacheManager.setMaintenance({
+      status: boolean,
+      message: string,
+    });
   }
 
   async getCacheMaintenance() {
-    return this.cacheManager.getMaintenance();
+    return await this.cacheManager.getMaintenance();
   }
 }

@@ -13,11 +13,15 @@ export class CacheService implements OnModuleInit {
     this.cacheManager.set('maintenanceFlag', false);
   }
 
-  async setMaintenance(inMaintenance: boolean) {
-    this.cacheManager.set('maintenanceFlag', inMaintenance);
+  async setMaintenance({ status: boolean, message: string }) {
+    this.cacheManager.set('maintenanceFlag', {
+      status: boolean,
+      message: string,
+    });
     const getStatus: { status: boolean } = await this.cacheManager.get(
       'maintenanceFlag',
     );
+    console.log(getStatus);
     if (getStatus.status == true) {
       const response = {
         inMaintenance: getStatus.status,
@@ -34,6 +38,9 @@ export class CacheService implements OnModuleInit {
   }
 
   async getMaintenance() {
-    return await this.cacheManager.get('maintenanceFlag');
+    const getStatus: { status: boolean; message: string } =
+      await this.cacheManager.get('maintenanceFlag');
+
+    return getStatus;
   }
 }

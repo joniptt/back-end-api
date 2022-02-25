@@ -7,6 +7,7 @@ import { UsuarioService } from './usuario.service';
 export class UsuarioController {
   constructor(private usuarioCad: UsuarioService) {}
 
+  @Public()
   @Post('cadastrar')
   async cadUsuario(@Body() user: UsuarioObj) {
     return await this.usuarioCad.cadUsuario(user);
@@ -14,18 +15,28 @@ export class UsuarioController {
 
   @Public()
   @Post('maintenance/on')
-  async setMaintenceOn(@Body() status: boolean) {
-    return await this.usuarioCad.setCacheMaintenance(status);
+  async setMaintenceOn(@Body() { status: boolean, message: string }) {
+    return await this.usuarioCad.setCacheMaintenance({
+      status: boolean,
+      message: string,
+    });
   }
 
   @Public()
   @Post('maintenance/off')
-  async setMaintenceOff(@Body() status: boolean) {
-    return await this.usuarioCad.setCacheMaintenance(status);
+  async setMaintenceOff(@Body() { status: boolean, message: string }) {
+    return await this.usuarioCad.setCacheMaintenance({
+      status: boolean,
+      message: string,
+    });
   }
+
   @Public()
   @Get('maintenance/status')
-  async getMaintenceStatus(): Promise<boolean> {
-    return <boolean>await this.usuarioCad.getCacheMaintenance();
+  async getMaintenceStatus(): Promise<{
+    status: boolean;
+    message: string;
+  }> {
+    return await this.usuarioCad.getCacheMaintenance();
   }
 }
