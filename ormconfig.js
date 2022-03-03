@@ -3,8 +3,8 @@ module.exports = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'root',
-  database: 'cadastro',
+  password: 'postgres',
+  database: 'usuarios',
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
 };
