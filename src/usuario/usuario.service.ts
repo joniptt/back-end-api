@@ -45,14 +45,5 @@ export class UsuarioService {
     return this.userEnti.find();
   }
 
-  async setCacheMaintenance({ status: boolean, message: string }) {
-    return await this.cacheManager.setMaintenance({
-      status: boolean,
-      message: string,
-    });
-  }
-
-  async getCacheMaintenance() {
-    return await this.cacheManager.getMaintenance();
-  }
+ 
 }

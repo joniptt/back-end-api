@@ -5,12 +5,23 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { Cache } from 'cache-manager';
+import { AppVersionDto } from 'src/dto/app-version.dto';
 
 @Injectable()
 export class CacheService implements OnModuleInit {
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
   onModuleInit() {
-    this.cacheManager.set('maintenanceFlag', false);
+    this.cacheManager.set('maintenanceFlag', {
+      status: false,
+      message: '',
+    });
+  }
+  async setAppVersion(appVersion: AppVersionDto) {
+    this.cacheManager.set('appVersion', appVersion);
+  }
+  async getAppVersion() {
+    const getApp: AppVersionDto = await this.cacheManager.get('appVersion');
+    return getApp;
   }
 
   async setMaintenance({ status: boolean, message: string }) {
@@ -18,23 +29,6 @@ export class CacheService implements OnModuleInit {
       status: boolean,
       message: string,
     });
-    const getStatus: { status: boolean } = await this.cacheManager.get(
-      'maintenanceFlag',
-    );
-    console.log(getStatus);
-    if (getStatus.status == true) {
-      const response = {
-        inMaintenance: getStatus.status,
-        message: 'Está em manutenção',
-      };
-      return response;
-    } else if (getStatus.status == false) {
-      const response = {
-        inMaintenance: getStatus.status,
-        message: 'Não está em manutenção',
-      };
-      return response;
-    }
   }
 
   async getMaintenance() {

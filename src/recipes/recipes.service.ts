@@ -23,7 +23,6 @@ export class RecipesService {
   }
 
   async getOne(id: number) {
-    let recipe = this.recipes.findOne(id);
-    return recipe;
+    return await this.recipes.findOne({ id: id });
   }
 }

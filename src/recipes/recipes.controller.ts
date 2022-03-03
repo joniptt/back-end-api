@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Public } from 'src/decorators/class.decorator';
 import { RecipesDto } from 'src/dto/recipe.dto';
 import { RecipesService } from './recipes.service';
 
@@ -16,6 +17,7 @@ export class RecipesController {
     return this.recipe.getAll();
   }
 
+  @Public()
   @Get(':id')
   async getOneRec(@Param('id') index: number): Promise<RecipesDto> {
     return this.recipe.getOne(index);

@@ -22,21 +22,18 @@ export class UsuarioController {
   //   });
   // }
 
-  // @Public()
-  // @Post('maintenance/off')
-  // async setMaintenceOff(@Body() { status: boolean, message: string }) {
-  //   return await this.usuarioCad.setCacheMaintenance({
-  //     status: boolean,
-  //     message: string,
-  //   });
+  // // @Public()
+  // // @Post('maintenance/off')
+  // // async setMaintenceOff(@Body() { status: boolean, message: string }) {
+  // //   return await this.usuarioCad.setCacheMaintenance({
+  // //     status: boolean,
+  // //     message: string,
+  // //   });
   // }
 
   // @Public()
   // @Get('maintenance/status')
-  // async getMaintenceStatus(): Promise<{
-  //   status: boolean;
-  //   message: string;
-  // }> {
-  //   return await this.usuarioCad.getCacheMaintenance();
+  // async getMaintenceStatus() {
+  //   return await this.usuarioCad.getVersion();
   // }
 }
