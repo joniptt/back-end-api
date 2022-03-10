@@ -1,15 +1,11 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
 @Entity()
-export class Processador {
+export class Produtos {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @Column()
   name: string;
-
-  @Column()
-  img: string;
 
   @Column()
   preco: number;
@@ -28,5 +24,16 @@ export class Processador {
 
   @Column()
   Threads: string;
-  
+
+  @Column()
+  Cor: string;
+
+  @Column()
+  DPI: string;
+
+  @Column()
+  CPU: string;
+
+  @Column()
+  Chipset: string;
 }

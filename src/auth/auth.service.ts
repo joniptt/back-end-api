@@ -27,6 +27,6 @@ export class AuthService {
   }
   async login(user: UsuarioObj) {
     const token = await this.signJwt(user);
-    return { token: token, exp: 60 };
+    return { token: token, exp: 1200 };
   }
 }
