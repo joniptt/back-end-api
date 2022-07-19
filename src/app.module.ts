@@ -1,21 +1,20 @@
-import { ProdutosModule } from './produtos/produtos.module';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { RecipesModule } from './recipes/recipes.module';
-import { UsuarioModule } from './usuario/usuario.module';
+import { CompanyModule } from './company/company.module';
+
+import { UserModule } from './infraesctructure/modules/user/user.module';
 
 @Module({
   imports: [
-    ProdutosModule,
+    UserModule,
+    CompanyModule,
     AuthModule,
-    RecipesModule,
-    UsuarioModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
